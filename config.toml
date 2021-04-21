@@ -1,0 +1,8 @@
+baseURL = "https://onthedrift.com"
+languageCode = "en-us"
+title = "On the drift"
+theme = "tale"
+disqusShortname = "onthedrift"
+
+[Author]
+    name = "Koen"
