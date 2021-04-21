@@ -18,8 +18,13 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-          # extended: true
-
+                # extended: true
+      
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          path: /home/runner/work/onthedrift/onthedrift/public/
+      
       - name: Build
         run: hugo --minify --verbose
 
