@@ -1,8 +1,7 @@
 ---
 categories:
 - DependencyInjection
-date: "2020-11-01"
-draft: false
+date: "2021-04-22"
 tags:
 - Dotnet
 - DI
