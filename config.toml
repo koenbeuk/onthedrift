@@ -12,7 +12,7 @@ enableGitInfo = true
 [Params]
   subtitle = "Comments and rants by yet another random developer"
   logo = "img/avatar-squared-nobody.png"
-  favicon = "img/avatar-squared.ico"
+  favicon = "img/avatar-squared-nobody.ico"
   commit = "https://github.com/koenbeuk/onthedrift/tree/"
   rss = true
   comments = true
