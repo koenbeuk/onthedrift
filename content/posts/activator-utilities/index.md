@@ -6,7 +6,7 @@ tags:
 title: "Activator utilities: activate anything!"
 ---
 
-Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That's where [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0) come in.
+Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That's where [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0) comes in.
 
 <!--more-->
 ## .NET and Dependency injection
