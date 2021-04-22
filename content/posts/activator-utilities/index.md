@@ -1,16 +1,16 @@
 ---
-categories:
-- DependencyInjection
 date: "2021-04-22"
 tags:
-- Dotnet
-- DI
-title: Activator utilities
+- .NET
+- Dependency Injection
+title: "Activator utilities: activate anything!"
 ---
-Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. 
 
+Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. dotNET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That's where [ActivatorUtilities](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0) come in.
+
+<!--more-->
 ## .NET and Dependency injection
-In .NET, Dependencies are typically resolved through an interface `IServiceProvider`. This is backed by a DI container (ServiceProvider) that holds all registrations of possible instances, including their lifetimes. This means that the .NET DI Container is responsible for both managing registrations, lifetimes, and hooking them up together. For this post, I assume that you are familiar with DI and its implementation within .NET. To learn more about using DI in .NET, check out the official [Microsoft documentation](//docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection).
+In .NET, Dependencies are typically resolved through an interface `IServiceProvider`. This is backed by a DI container (ServiceProvider) that holds all registrations of possible instances, including their lifetimes. This means that the .NET DI Container is responsible for both managing registrations, lifetimes, and hooking them up together. For this post, I assume that you are familiar with DI and its implementation within .NET. To learn more about using DI in .NET, check out the official [Microsoft documentation](//docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection). Examples given in this post are available on [Github](https://github.com/koenbeuk/ActivatorUtilityTests)
 
 ## Resolving dependencies
 To resolve dependencies. You'll typically get your hands on an `IServiceProvider` instance. This same instance can then be used to dynamically resolve dependencies as shown below:

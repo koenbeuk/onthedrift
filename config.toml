@@ -10,24 +10,32 @@ enableEmoji = true
 enableGitInfo = true
 
 [Params]
-  subtitle = "A small site for simple samples & short sentences"
-  logo = "img/avatar-squared.png"
+  subtitle = "Comments and rants by yet another random developer"
+  logo = "img/avatar-squared-nobody.png"
   favicon = "img/avatar-squared.ico"
   commit = "https://github.com/koenbeuk/onthedrift/tree/"
   rss = true
   comments = true
   readingTime = true
   socialShare = true
+  showRelatedPosts = true
+  hideAuthor = true
 
-[[Params.bigimg]]
-  src = "img/avatar.svg"
-  desc = "StaticmanLab + Hugo + KaTeX"
-  position = "center"
 
 [Author]
-    name = "Koen"
-    website = "https://www.onthedrift.com"
-    email = "koen@linker.io"
-    github = "koenbeuk"
-    twitter = "onthedrift2"
-    stackoverflow = "polity"
+  name = "Koen"
+  website = "https://www.onthedrift.com"
+  email = "koen@linker.io"
+  github = "koenbeuk"
+  twitter = "onthedrift2"
+  stackoverflow = "users/272424/polity"
+
+[[menu.main]]
+    name = "Blog"
+    url = ""
+    weight = 1
+
+[[menu.main]]
+    name = "Tags"
+    url = "tags"
+    weight = 3
