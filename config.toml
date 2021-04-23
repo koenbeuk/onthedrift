@@ -1,6 +1,6 @@
-baseURL = "https://onthedrift.com"
+baseURL = "https://wwww.onthedrift.com"
 languageCode = "en-us"
-title = "On the drift"
+title = "On The Drift"
 theme = "beautifulhugo"
 enableRobotsTXT = true
 disqusShortname = "onthedrift"
