@@ -9,7 +9,7 @@ title: Introducing ScenarioTests, an experiment in improving the .NET testing ex
 draft: true
 ---
 
-When developing software, you'll sooner or later be confronted with the notion of Tests. There are tons of resources available, both offline and online about testing software. In the .NET landscape we have plenty of [options](https://docs.microsoft.com/en-us/dotnet/core/testing/). Unit tests seem to be by far the most popular types of tests (based on the existing frameworks and their nuget download numbers). Lets imagine that we're implemting a Stack datatype and we now want to prove that we can Push something on our stack:
+When developing software, you'll sooner or later be confronted with the notion of Tests. There are tons of resources available, both offline and online about testing software. In the .NET landscape we have plenty of [options](https://docs.microsoft.com/en-us/dotnet/core/testing/). Unit tests seem to be by far the most popular types of tests (based on the existing frameworks and their nuget download numbers). Let's imagine that we're implementing a Stack datatype and we now want to prove that we can Push something on our stack:
 
 ```csharp
 [Fact]
@@ -26,9 +26,9 @@ void Push_IncreasesStackSize(){
 }
 ```
 
-This follows a typical arrange/act/assert pattern where in our arrange step we can setup a scenario, we then act on that scenario in our act step and finally we assert that our state is as we were expecting. We actually did something else. We had an initial assertion in our arrange step to ensure that we started out with a initial count of 0. 
+This follows a typical arrange/act/assert pattern wherein our arrange step we can set up a scenario, we then act on that scenario in our act step and finally we assert that our state is as we were expecting. We actually did something else. We had an initial assertion in our arrange step to ensure that we started out with an initial count of 0. 
 
-Doing multiple assertions- or rather, asserting different and subsequently evolving cases within a single test is typically discouraged. The problem with this approach is that If my initial count was not 0 but lets say NULL (since nothing was yet pushed to the Stack) then my entire test would have failed including the Assertion that indeed pushing in 1 item would set the Stack size to 1. Instead I should have written 2 test methods:
+Doing multiple assertions- or rather, asserting different and subsequently evolving cases within a single test is typically discouraged. The problem with this approach is that If my initial count was not 0 but let's say NULL (since nothing was yet pushed to the Stack) then my entire test would have failed including the Assertion that indeed pushing in 1 item would set the Stack size to 1. Instead, I should have written 2 test methods:
 
 ```csharp
 [Fact]
@@ -114,7 +114,7 @@ public void Ensure_That_Item_Was_Ordered_For_New_User() {
 }
 ```
 
-Imagine having to write a second test that ensures that the order got shipped out. It would be a whole lot of repetition to get to a basic state and then some additional assertion. Yes, you could and probably should wrap up some of the arrangement steps in helper methods but that will only save you soo much... (I was running into this exact same issue when testing a service manipulating and querying a [Gremlin](https://tinkerpop.apache.org/gremlin.html) enabled database. There was little use in properly unit testing that service since each query would need to be parsed by an actual Gremlin enabled database). 
+Imagine having to write a second test that ensures that the order got shipped out. It would be a whole lot of repetition to get to a basic state and then some additional assertion. Yes, you could and probably should wrap up some of the arrangement steps in helper methods but that will only save you soo much... (I was running into this exact same issue when testing a service manipulating and querying a [Gremlin](https://tinkerpop.apache.org/gremlin.html) enabled database. There was little use in properly unit testing that service, since each query would need to be parsed by an actual Gremlin enabled database). 
 
 If I was to 'hack' this Server in an afternoon, I would typically not bother testing it and rather just implement a console application that would then play our a Scenario and I would make use of `Console.WriteLine` and the debugger to ensure that things are working as expected. A typical example would look just like you'd expect:
 
@@ -180,11 +180,11 @@ And what you would see in VS:
 ![VS2019 Test explorer output](vscapture1.png "VS2019 Test explorer output")
 
 
-What happened here? We expressed a scenario that essentially creates an empty stack, pushes an item and then pushes a second item. Along the way we were able to add assertions to test the scenario as it was at that stage. If you looked closely you would have seen that we actually manipulated our stack and Popped an item in one of our Tests. This however did not affect the subsequent tests in our scenario since it was encapsulated within that test. How did that work?
+What happened here? We expressed a scenario that essentially creates an empty stack, pushes an item, and then pushes a second item. Along the way we were able to add assertions to test the scenario as it was at that stage. If you looked closely you would have seen that we actually manipulated our stack and Popped an item in one of our Tests. This however did not affect the subsequent tests in our scenario since it was encapsulated within that test. How did that work?
 
-`ScenarioTests` uses a source generator that generates XUnit test methods for each invocation of `Assert` or `Theory` on the ScenarioContext that got passed in as an argument. That test method is then configured to run our Scenario while ending as soon as it hits a conclusion for that particular test. In case of our `Starts with a size of 0` test. It would end the scenario right after it was able to assert that the stack started with a size of 0.
+`ScenarioTests` uses a source generator that generates XUnit test methods for each invocation of `Assert` or `Theory` on the ScenarioContext that got passed in as an argument. That test method is then configured to run our Scenario while ending as soon as it hits a conclusion for that particular test. In the case of our `Starts with a size of 0` test. It would end the scenario right after it was able to assert that the stack started with a size of 0.
 
-Even if we were to throw an exception right in the middle of this Scenario, tests running before that exception will still pass. Because of this logic, we can even manipulate our Scenario within one of our test methods as demonstrated by our Pop call in one of our tests and stil have confidence that the manipulation does not affect subsequent tests.
+Even if we were to throw an exception right in the middle of this Scenario, tests running before that exception will still pass. Because of this logic, we can even manipulate our Scenario within one of our test methods as demonstrated by our Pop call in one of our tests and still have confidence that the manipulation does not affect subsequent tests.
 
 This is all great but what about dealing with Theories. A Theory in XUnit is something that I'd like to describe as something that should be true for at least the input that I've tested it against. Let's say we wanted to continue our scenario and make sure that we can push many items onto our stack while still having the count go up accordingly, we can do just that:
 
@@ -209,7 +209,7 @@ And what we would see in VS:
 
 
 ### Conclusion
-With ScenarioTests you can express your scenario in your favorite language (assuming that its C#, nothing it stopping this from working on other languages but it will need some work). ScenarioTests are currently still an experiment though they are being used widely in one of the businesses that I'm involved with and I would suspect a production ready version soon. Meanwhile I would really like your feedback (positive and negative). 
+With ScenarioTests you can express your scenario in your favorite language (assuming that it's C#, nothing is stopping this from working on other languages but it will need some work). ScenarioTests are currently still an experiment though they are being used widely in one of the businesses that I'm involved with and I would suspect a production-ready version soon. Meanwhile I would really like your feedback (positive and negative). 
 
 You can find the project on [Github](https://github.com/koenbeuk/ScenarioTests)
 And pull it directly from [NuGet](https://www.nuget.org/packages/ScenarioTests.XUnit/)
