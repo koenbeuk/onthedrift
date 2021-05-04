@@ -8,7 +8,10 @@ tags:
 title: Introducing ScenarioTests, an experiment in improving the .NET testing experience
 ---
 
-When developing software, you'll sooner or later be confronted with the notion of Tests. In the .NET landscape we have plenty of [tools](https://docs.microsoft.com/en-us/dotnet/core/testing/) at our disposal to help us test our code. For the sake of an example, let's imagine that we're implementing a Stack datatype and we now want to prove that we can Push something on our stack:
+When developing software, you'll sooner or later be confronted with the notion of Tests. In the .NET landscape we have plenty of [tools](https://docs.microsoft.com/en-us/dotnet/core/testing/) at our disposal to help us test our code. In this post I'd like to introduce [ScenarioTests](https://github.com/koenbeuk/ScenarioTests). A new project that aims to make testing in .NET better. 
+
+<!--more-->
+Before talking about what ScenarioTests are, lets first describe a common approach for testing our code currently. Let's imagine that we're implementing a Stack datatype and we now want to prove that we can Push something on our stack:
 
 ```csharp
 [Fact]
