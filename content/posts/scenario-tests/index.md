@@ -115,7 +115,7 @@ public void Ensure_That_Item_Was_Ordered_For_New_User() {
 
 Imagine having to write a second test that ensures that the order got shipped out. It would be a whole lot of repetition to get to a basic state and then some additional assertion. Yes, you could and probably should wrap up some of the arrangement steps in helper methods but that will only save you soo much... (I ran into this exact same issue when testing a service manipulating and querying a [Gremlin](https://tinkerpop.apache.org/gremlin.html) enabled database). 
 
-If I was to 'hack' this Server in an afternoon, I would typically not bother testing it and rather just implement a console application that would then play our a Scenario and I would make use of `Console.WriteLine` and the debugger to ensure that things are working as expected. A typical example would look just like you'd expect:
+If I was to 'hack' this Server in an afternoon, I would typically not bother testing it and rather just implement a console application that would then play out a Scenario and I would make use of `Console.WriteLine` and the debugger to ensure that things are working as expected. A typical example would look just like you'd expect:
 
 ```csharp
 async Task Main() {
@@ -207,7 +207,7 @@ This is all great but what about dealing with Theories. I like to describe a the
 And what we would see in VS:
 ![VS2019 Test explorer output](vscapture2.png "VS2019 Test explorer output")
 
-So what would a typical end-to-end scenario look like:
+Again we made use of the fact that tests run in isolution. Each theory case is manipulating the state of our Stack however it does not affect or gets affected by other Theory cases. This works since the Scenario is replayed for each theory case. So what would a typical end-to-end scenario look like:
 
 ```csharp
 [Scenario]
