@@ -1,11 +1,10 @@
 ---
-date: "2021-06-01"
+date: "2021-06-03"
 tags:
 - .NET
 - EFCore
 - EFCore.Projectables
 title: EF Projections on computed properties and methods without a hassle!
-draft: true
 ---
 
 One of EF's main selling points is that it allows you to write queries without having to deal with the underlying database technology being used. This however has its limitations as you as a developer will have likely encountered. EFCore is only able to handle expressions that are typed as such. As a result, if you try to select anything from a locally computed property or method then EFCore will have to fall back to client-side evaluation to compute the result of that expression which may be inefficient and is certainly limiting!
