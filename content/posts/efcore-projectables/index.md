@@ -38,7 +38,7 @@ This actually works! However, there are some issues with the former generated qu
 dbContext.Users.Where(x => x.FullName.Contains("Jon"));
 ```
 
-This will blow up in EF since EF is unable to translate this valid CSharp expression to SQL as it does not know how to translate FullName into a proper SQL call. We could have called `Users.AsEnumerable().Where(x => x.FullName.Contains("Jon"));` and this would have worked but again, we would be overfetching as EF would first pull in all our users into our DbContext and then do perform the Where clause in memory.
+This will blow up in EF since EF is unable to translate this valid CSharp expression to SQL as it does not know how to translate FullName into a proper SQL call. We could have called `Users.AsEnumerable().Where(x => x.FullName.Contains("Jon"));` and this would have worked but again, we would be overfetching as EF would first pull in all our users into our DbContext and then perform the Where clause in memory.
 
 We could of course re-implement the FullName property within our Query and things just work, e.g.
 ```csharp
@@ -72,19 +72,19 @@ FROM "Users" AS "u"
 WHERE ('Jon' = '') OR (instr((COALESCE("u"."FirstName", '') || ' ') || COALESCE("u"."LastName", ''), 'Jon') > 0)
 ```
 
-We were able to filter within the produced query and only fetch the fields that we needed. Great! untill we need to  know FullTime on the client. We would then have to call something like: 
+We were able to filter within the produced query and only fetch the fields that we needed. Great! untill we need to  know FullName on the client. We would then have to call something like: 
 ```csharp
 user.FullName().Compile().Invoke(user);
 ```
 
 Again, not such a great experience and certainly not good for performance. We could leave them side-by-side, meaning one implementing using Expressions and one implemented as a normal computed property but that would either require us to implement FullName twice or take a perforamnce hit. 
 
-If you recall from our LINQ Query, we also had to make a call to `AsExpandable()` to ensure that the LINQ Query would be rewritten to translate our `FullName()` call into the implementation that EF would actually understand. This again adds more complexity to the query and thereby also incurring a performance impact on the execution of that query.
+If you recall from our LINQ Query, we also had to make a call to `AsExpandable()` to ensure that the LINQ Query would be rewritten to translate our `FullName()` call into the implementation that EF would actually understand. This again adds more complexity as well to the query and thereby also incurring a performance impact on the execution of that query.
 
 These libraries have helpers us over time but its 2021 and we have new tools in our toolbelt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
 
 ### EntityFrameworkCore.Projectables
-This library intends to tackle the above problems and much more! For a while now we have access to SourceGenerators. SourceGenerators are great as they allow us to write a Generator that produces additional source code based on your source code. What this means is that we can now automatically produce Expression methods for your properties and methods. All you need to do is mark those properties and methods for which you'd like an Expression method to be generated with an attribute. Perhaps that is hard to understand so lets examine what we can do with this project:
+This library intends to tackle the above problems and much more! For a while now we have access to SourceGenerators. A Generator allows us to produce additional source code based on your source code. What this means is that we can now automatically produce Expression methods for your properties and methods. All you need to do is mark those properties and methods for which you'd like an Expression method to be generated with an attribute. Perhaps that is hard to understand so lets examine what we can do with our example:
 
 ```csharp
 public class User
@@ -116,7 +116,7 @@ dbContext.Users.Where(x => x.FullName.Contains("Jon"));
 ```
 This query should blow up right? We did not make a call to `AsExapandable` as we did before. How does EF know to use our generated expression instead of our normal property?
 
-The answer is, no. This query will translate to SQL perfectly fine without overfetching, for as long as we've enabled Projectables with our DbContext. How do we do that? We call `UseProjectables()` on our OptionsBuilder! e.g. in case of using DI:
+This query will translate to SQL perfectly fine without overfetching, for as long as we've enabled Projectables with our DbContext. How do we do that? We call `UseProjectables()` on our OptionsBuilder! e.g. in case of using DI:
 ```csharp
 serviceProvider.AddDbContext<ApplicationDbContext>(options => {
         options
@@ -170,7 +170,10 @@ public class User {
     public double TotalSpent => this.Orders.Sum(x => x.PriceSum);
 }
 
-var mostValuableUser = dbContext.Users.OrderByDescending(x => x.TotalSpent).Select(x => x.Id).FirstOrDefault();
+var mostValuableUser = dbContext.Users
+    .OrderByDescending(x => x.TotalSpent)
+    .Select(x => x.Id)
+    .FirstOrDefault();
 ```
 
 What this query would generate should be of no suprise: 
