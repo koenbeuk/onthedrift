@@ -4,15 +4,15 @@ title = "On The Drift"
 theme = "beautifulhugo"
 enableRobotsTXT = true
 disqusShortname = "onthedrift"
-pygmentsCodeFences = true
-pygmentsUseClasses = true
 enableEmoji = true
 enableGitInfo = true
+pygmentsCodeFences = true
+pygmentsUseClasses = true
 
 [Params]
   subtitle = "Comments and rants by yet another random developer"
   logo = "img/avatar-squared-nobody.png"
-  favicon = "img/avatar-squared-nobody.ico"
+  favicon = "img/avatar-squared-nobody.ico"h 
   commit = "https://github.com/koenbeuk/onthedrift/tree/"
   rss = true
   comments = true
@@ -20,7 +20,7 @@ enableGitInfo = true
   socialShare = true
   showRelatedPosts = true
   hideAuthor = true
-
+  useHLJS = true
 
 [Author]
   name = "Koen"
