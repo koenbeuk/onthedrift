@@ -37,7 +37,7 @@ This actually works! However, there are some issues with the formerly generated 
 dbContext.Users.Where(x => x.FullName.Contains("Jon"));
 ```
 
-This will blow up in EF since EF is unable to translate this valid CSharp expression to SQL as it does not know how to translate FullName into a proper SQL call. We could have called `Users.AsEnumerable().Where(x => x.FullName.Contains("Jon"));` and this would have worked but again, we would be overfetching as EF would first pull in all our users into our DbContext and then perform the Where clause in memory.
+This will blow up in EF since EF is unable to translate this valid CSharp expression to SQL as it does not know how to translate FullName into a proper SQL call. We could have called `Users.AsEnumerable().Where(x => x.FullName.Contains("Jon"));` and this would have worked but again, we would be over-fetching as EF would first pull in all our users into our DbContext and then perform the Where clause in memory.
 
 We could of course re-implement the FullName property within our Query and things just work, e.g.
 ```csharp
@@ -120,7 +120,7 @@ This query will translate to SQL perfectly fine without over fetching, for as lo
 serviceProvider.AddDbContext<ApplicationDbContext>(options => {
         options
             .UseSqlite(...)
-            .UseProjections();
+            .UseProjectables();
     })
 
 ```
@@ -130,7 +130,7 @@ Or when not using DI:
 override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder.UseSqlServer(...);
-    optionsBuilder.UseProjections();
+    optionsBuilder.UseProjectables();
 }
 ```
 At this stage, EF is fully equipped to translate any query that queries on a property or method that is marked with `[Projectable]` to use the source generated version internally. Since this happens early in the processing pipeline, no additional performance overhead is essentially added as EFCore does a great job in caching compiled queries.
