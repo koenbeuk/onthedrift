@@ -83,7 +83,7 @@ If you recall from our LINQ Query, we also had to make a call to `AsExpandable()
 These libraries have helpers us over time but it's 2021 and we have new tools in our toolbelt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
 
 ### EFCore Projectables
-[EntityFrameworkCore.Projectables]((https://github.com/koenbeuk/EntityFrameworkCore.Projectables)) library intends to tackle the above problems and much more! For a while now we have access to SourceGenerators. A Generator allows us to produce additional source code based on your source code. What this means is that we can now automatically produce Expression methods for your properties and methods. All you need to do is mark those properties and methods for which you'd like an Expression method to be generated with an attribute. Perhaps that is hard to understand so let us examine what we can do with our example:
+[EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables) library intends to tackle the above problems and much more! For a while now we have access to SourceGenerators. A Generator allows us to produce additional source code based on your source code. What this means is that we can now automatically produce Expression methods for your properties and methods. All you need to do is mark those properties and methods for which you'd like an Expression method to be generated with an attribute. Perhaps that is hard to understand so let us examine what we can do with our example:
 
 ```csharp
 public class User
