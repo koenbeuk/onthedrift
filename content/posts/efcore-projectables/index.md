@@ -10,6 +10,7 @@ title: EF Projections on computed properties and methods without a hassle!
 One of EF's main selling points is that it allows you to write queries without having to deal with the underlying database technology being used. This however has its limitations as you as a developer will have likely encountered. EFCore is only able to handle expressions that are typed as such. As a result, if you try to select anything from a locally computed property or method then EFCore will have to fall back to client-side evaluation to compute the result of that expression which may be inefficient and is certainly limiting!
 
 Consider the following example:
+
 ```csharp
 public class User
 {
@@ -26,6 +27,7 @@ dbContext.Users.Select(x => x.FullName).ToList();
 ```
 
 This query is getting compiled (targeting SQLLite) as follows:
+
 ```sql
 SELECT "u"."Id", "u"."EmailAddress", "u"."FirstName", "u"."LastName"
 FROM "Users" AS "u"
@@ -40,6 +42,7 @@ dbContext.Users.Where(x => x.FullName.Contains("Jon"));
 This will blow up in EF since EF is unable to translate this valid CSharp expression to SQL as it does not know how to translate FullName into a proper SQL call. We could have called `Users.AsEnumerable().Where(x => x.FullName.Contains("Jon"));` and this would have worked but again, we would be over-fetching as EF would first pull in all our users into our DbContext and then perform the Where clause in memory.
 
 We could of course re-implement the FullName property within our Query and things just work, e.g.
+
 ```csharp
 dbContext.Users.Where(x => (x.FirstName + " " + x.LastName).Contains("Jon"));
 ```
@@ -65,24 +68,27 @@ dbContext.Users.AsExpandable().Select(x => x.FullName()).ToList();
 ```
 
 This will now effectively compile our LINQ Query into optimal SQL that only includes what is needed. This is what SQL Lite produces:
+
 ```sql
 SELECT "u"."Id", "u"."FirstName", "u"."LastName"
 FROM "Users" AS "u"
 WHERE ('Jon' = '') OR (instr((COALESCE("u"."FirstName", '') || ' ') || COALESCE("u"."LastName", ''), 'Jon') > 0)
 ```
 
-We were able to filter within the produced query and only fetch the fields that we needed. Great! until we need to compute the FullName on the client. We would then have to call something like: 
+We were able to filter within the produced query and only fetch the fields that we needed. Great! until we need to compute the FullName on the client. We would then have to call something like:
+
 ```csharp
 user.FullName().Compile().Invoke(user);
 ```
 
-Again, not such a great experience and certainly not good for performance. We could leave them side-by-side, meaning one implementing using Expressions and one implemented as a normal computed property but that would either require us to implement FullName twice or take a performance hit. 
+Again, not such a great experience and certainly not good for performance. We could leave them side-by-side, meaning one implementing using Expressions and one implemented as a normal computed property but that would either require us to implement FullName twice or take a performance hit.
 
 If you recall from our LINQ Query, we also had to make a call to `AsExpandable()` to ensure that the LINQ Query would be rewritten to translate our `FullName()` call into the implementation that EF would actually understand. This again adds more complexity as well to the query and thereby also incurring a performance impact on the execution of that query.
 
-These libraries have helpers us over time but it's 2021 and we have new tools in our toolbelt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
+These libraries have helpers us over time but it's 2021 and we have new tools in our tool belt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
 
 ### EFCore Projectables
+
 [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables) library intends to tackle the above problems and much more! For a while now we have access to SourceGenerators. A Generator allows us to produce additional source code based on your source code. What this means is that we can now automatically produce Expression methods for your properties and methods. All you need to do is mark those properties and methods for which you'd like an Expression method to be generated with an attribute. Perhaps that is hard to understand so let us examine what we can do with our example:
 
 ```csharp
@@ -113,9 +119,11 @@ We've received a new class (tugged away in a namespace: `EntityFrameworkCore.Pro
 ```csharp
 dbContext.Users.Where(x => x.FullName.Contains("Jon"));
 ```
-This query should blow up, right? We did not make a call to `AsExapandable` as we did before. How does EF know to use our generated expression instead of our normal property?
+
+This query should blow up, right? We did not make a call to `AsExpandable` as we did before. How does EF know to use our generated expression instead of our normal property?
 
 This query will translate to SQL perfectly fine without over fetching, for as long as we've enabled Projectables with our DbContext. How do we do that? We call `UseProjectables()` on our OptionsBuilder! e.g. in case of using DI:
+
 ```csharp
 serviceProvider.AddDbContext<ApplicationDbContext>(options => {
         options
@@ -126,6 +134,7 @@ serviceProvider.AddDbContext<ApplicationDbContext>(options => {
 ```
 
 Or when not using DI:
+
 ```csharp
 override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
@@ -133,9 +142,11 @@ override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     optionsBuilder.UseProjectables();
 }
 ```
+
 At this stage, EF is fully equipped to translate any query that queries on a property or method that is marked with `[Projectable]` to use the source generated version internally. Since this happens early in the processing pipeline, no additional performance overhead is essentially added as EFCore does a great job in caching compiled queries.
 
 What this then allows us to do is something as the following:
+
 ```csharp
 var  users = dbContext.Users.Select(x => new { x.Id, x.FullName });
 foreach (var user in users) {
@@ -144,6 +155,7 @@ foreach (var user in users) {
 ```
 
 Our generated SQL would hence be as simple as:
+
 ```sql
 SELECT "u"."Id", (COALESCE("u"."FirstName", '') || ' ') || COALESCE("u"."LastName", '') AS "FullName"
 FROM "Users" AS "u"
@@ -152,6 +164,7 @@ FROM "Users" AS "u"
 We have everything that we wanted. No over-fetching, no performance overhead and essentially no additional code except for our added `Projectable` attribute.
 
 ### Real world scenarios
+
 So far so good, We've been able to query a very simple projectable property. But what about a more complicated example. Let say our User has Orders and we want to have a computed property exposed on the User that can tell us how much this user has spent so far on all Orders. Perhaps something like this:
 
 ```csharp
@@ -177,7 +190,8 @@ var mostValuableUser = dbContext.Users
     .FirstOrDefault();
 ```
 
-What this query would generate should be of no suprise: 
+What this query would generate should be of no surprise:
+
 ```sql
 SELECT "u"."Id"
 FROM "Users" AS "u"
@@ -212,6 +226,7 @@ dbContext.Users.Select(x => new {
 ```
 
 This again provides us with the following SQL:
+
 ```sql
 SELECT "u"."Id", "t"."OrderId", "t"."CreatedDate", "t"."ProductId", "t"."UserId"
 FROM "Users" AS "u"
@@ -226,6 +241,7 @@ ORDER BY "u"."Id", "t"."OrderId"
 Our CreatedAfterDate argument was captured as a parameter and passed in such that our query plan can effectively be compiled and reused.
 
 Lets take this on step further. We want to have an extension method that helps us find the most valuable recent order that has a value over whatever we give it. Let's look at our scenario first:
+
 ```csharp
 public static class UserExtensions {
     public static Order GetMostValuableRecentOrder(this User user, DateTime createdAfterDate, double minimumValueToBeConsidered) 
@@ -246,6 +262,7 @@ var query = dbContext.Users
 ```
 
 And when we execute our SQL we get something that is slightly unexpected:
+
 ```sql
 SELECT (COALESCE("u"."FirstName", '') || ' ') || COALESCE("u"."LastName", ''), "t0"."OrderId", "t0"."CreatedDate", "t0"."ProductId", "t0"."UserId"
 FROM "Users" AS "u"
@@ -295,5 +312,5 @@ ORDER BY (
 We can see multiple projectable properties and methods at work here. First we've shown that we can query on extension methods as long as they are marked as Projectables. We can subsequently call additional projectable properties and methods and all can make use of parameters that we passed in. The generated SQL however is less than optimal and we could do better by manually writing SQL. This however is unrelated to this project and more of an issue with what EF and its database provider can do at the moment.
 
 ### Conclusion
-[EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables) is a great tool to have when working within the confines of EFCore. It allows us to write our logic once and reuse it both within our queries as well as on the client-side. With great power comes great responsibilities though as we may be better off just embracing our database and use stored procedures for optimal performance. Regardless. Using Projectables enables a whole new set of paradigms that were difficult to achieve without it. I hence strongly suggest you checkout this project and see how it works for you.
 
+[EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables) is a great tool to have when working within the confines of EFCore. It allows us to write our logic once and reuse it both within our queries as well as on the client-side. With great power comes great responsibilities though as we may be better off just embracing our database and use stored procedures for optimal performance. Regardless. Using Projectables enables a whole new set of paradigms that were difficult to achieve without it. I hence strongly suggest you checkout this project and see how it works for you.
