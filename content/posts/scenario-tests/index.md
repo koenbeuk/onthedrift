@@ -8,7 +8,7 @@ tags:
 title: Introducing ScenarioTests, an experiment in improving the .NET testing experience
 ---
 
-When developing software, you'll sooner or later be confronted with the notion of Tests. In the .NET landscape we have plenty of [tools](https://docs.microsoft.com/en-us/dotnet/core/testing/) at our disposal to help us test our code. In this post I'd like to introduce [ScenarioTests](https://github.com/koenbeuk/ScenarioTests). A new project that aims to make testing in .NET better. 
+When developing software, you'll sooner or later be confronted with the notion of Tests. In the .NET landscape we have plenty of [tools](https://docs.microsoft.com/en-us/dotnet/core/testing/) at our disposal to help us test our code. In this post I'd like to introduce [ScenarioTests](https://github.com/koenbeuk/ScenarioTests). A new project that aims to make testing in .NET better.
 
 <!--more-->
 Before talking about what ScenarioTests are, lets first describe a common approach for testing our code currently. Let's imagine that we're implementing a Stack datatype and we now want to prove that we can Push something on our stack:
@@ -28,7 +28,7 @@ void Push_IncreasesStackCount(){
 }
 ```
 
-This follows a typical arrange/act/assert pattern wherein our arrange step we can set up a scenario, we then act on that scenario in our act step and finally we assert that our state is as we were expecting. We actually did something else. We had an initial assertion in our arrange step to ensure that we started out with an initial count of 0. 
+This follows a typical arrange/act/assert pattern wherein our arrange step we can set up a scenario, we then act on that scenario in our act step and finally we assert that our state is as we were expecting. We actually did something else. We had an initial assertion in our arrange step to ensure that we started out with an initial count of 0.
 
 Doing multiple assertions- or rather, asserting different and subsequently evolving cases within a single test is typically discouraged. The problem with this approach is that If my initial count was not 0 but let's say NULL (since nothing was yet pushed to the Stack) then my entire test would have failed including the Assertion that indeed pushing in 1 item would set the Stack count to 1. Instead, I should have written 2 test methods:
 
@@ -116,7 +116,7 @@ public void Ensure_That_Item_Was_Ordered_For_New_User() {
 }
 ```
 
-Imagine having to write a second test that ensures that the order got shipped out. It would be a whole lot of repetition to get to a basic state and then some additional assertion. Yes, you could and probably should wrap up some of the arrangement steps in helper methods but that will only save you soo much... (I ran into this exact same issue when testing a service manipulating and querying a [Gremlin](https://tinkerpop.apache.org/gremlin.html) enabled database). 
+Imagine having to write a second test that ensures that the order got shipped out. It would be a whole lot of repetition to get to a basic state and then some additional assertion. Yes, you could and probably should wrap up some of the arrangement steps in helper methods but that will only save you soo much... (I ran into this exact same issue when testing a service manipulating and querying a [Gremlin](https://tinkerpop.apache.org/gremlin.html) enabled database).
 
 If I was to 'hack' this Server in an afternoon, I would typically not bother testing it and rather just implement a console application that would then play out a Scenario and I would make use of `Console.WriteLine` and the debugger to ensure that things are working as expected. A typical example would look just like you'd expect:
 
@@ -142,6 +142,7 @@ Because I have the debugger at my disposal, I can simply intercept any step and 
 ### Introducing ScenarioTests
 
 With [ScenarioTests](https://github.com/koenbeuk/ScenarioTests) I started an experiment to see if we can combine best of all worlds, that is:
+
 1. Let me express a scenario from start to finish using a language that I'm comfortable in (in this case C#)
 2. Let me add assertions along the way testing the current state of that scenario
 3. Let me branch out (e.g. use a non-existing UserID and assert how the subject should react if that was the case)
@@ -197,7 +198,7 @@ This is all great but what about dealing with Theories. I like to describe a the
     var initialStackSize = subject.Count; // Capture what we already had in the stack
 
     foreach (var numbersToAdd in theoryCases) {
-        scenario.Theory("We can add X items and still statisfy our count property", numbersToAdd, () => {
+        scenario.Theory("We can add X items and still satisfy our count property", numbersToAdd, () => {
             for (var i = 0; i < numbersToAdd; i++) {
                 subject.Push(0);
             }
@@ -210,7 +211,7 @@ This is all great but what about dealing with Theories. I like to describe a the
 And what we would see in VS:
 ![VS2019 Test explorer output](vscapture2.png "VS2019 Test explorer output")
 
-Again we made use of the fact that tests run in isolution. Each theory case is manipulating the state of our Stack however it does not affect or gets affected by other Theory cases. This works since the Scenario is replayed for each theory case. So what would a typical end-to-end scenario look like:
+Again we made use of the fact that tests run in isolation. Each theory case is manipulating the state of our Stack however it does not affect or gets affected by other Theory cases. This works since the Scenario is replayed for each theory case. So what would a typical end-to-end scenario look like:
 
 ```csharp
 [Scenario]
@@ -243,12 +244,8 @@ void Scenario(ScenarioContext scenario) {
 As expected we are able to write down our scenario in our DSL of choice which happens to be C#. We even introduced a check to see if Docker is available to us as our imaginary server would need it. We then properly skip tests if Docker is not available.
 
 ### Conclusion
+
 With ScenarioTests you can express your scenario in C# while testing along the way. ScenarioTests are currently in an experimental phase. You can find the project on [Github](https://github.com/koenbeuk/ScenarioTests)
 And pull it directly from [NuGet](https://www.nuget.org/packages/ScenarioTests.XUnit/)
 
 More samples are available on [Github](https://github.com/koenbeuk/ScenarioTests/tree/master/samples) and in a separate [E2E test demo project](https://github.com/koenbeuk/SampleApiE2ETests)
-
-
-
-
-
