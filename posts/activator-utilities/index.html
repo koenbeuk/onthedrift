@@ -1,16 +1,130 @@
-<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Activator utilities: activate anything! - On The Drift</title><meta name=description content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where ActivatorUtilities comes in."><meta name=author content="Koen"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"On The Drift","url":"https:\/\/www.onthedrift.com"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/www.onthedrift.com"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/www.onthedrift.com","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/www.onthedrift.com\/posts\/activator-utilities\/","name":"Activator utilities activate anything!"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Koen"},"headline":"Activator utilities: activate anything!","description":"Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That\u0026rsquo;s where ActivatorUtilities comes in.\n","inLanguage":"en","wordCount":1766,"datePublished":"2021-04-22T00:00:00","dateModified":"2021-04-22T00:00:00","image":"https:\/\/www.onthedrift.com\/img\/avatar-squared-nobody.png","keywords":[".NET, Dependency Injection"],"mainEntityOfPage":"https:\/\/www.onthedrift.com\/posts\/activator-utilities\/","publisher":{"@type":"Organization","name":"https:\/\/www.onthedrift.com","logo":{"@type":"ImageObject","url":"https:\/\/www.onthedrift.com\/img\/avatar-squared-nobody.png","height":60,"width":60}}}</script><meta property="og:title" content="Activator utilities: activate anything!"><meta property="og:description" content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where ActivatorUtilities comes in."><meta property="og:image" content="https://www.onthedrift.com/img/avatar-squared-nobody.png"><meta property="og:url" content="https://www.onthedrift.com/posts/activator-utilities/"><meta property="og:type" content="website"><meta property="og:site_name" content="On The Drift"><meta name=twitter:title content="Activator utilities: activate anything!"><meta name=twitter:description content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET …"><meta name=twitter:image content="https://www.onthedrift.com/img/avatar-squared-nobody.png"><meta name=twitter:card content="summary"><meta name=twitter:site content="@onthedrift2"><meta name=twitter:creator content="@onthedrift2"><link href=https://www.onthedrift.com/img/avatar-squared-nobody.ico rel=icon type=image/x-icon><meta name=generator content="Hugo 0.85.0"><link rel=alternate href=https://www.onthedrift.com/index.xml type=application/rss+xml title="On The Drift"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://www.onthedrift.com/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://www.onthedrift.com/css/highlight.min.css><link rel=stylesheet href=https://www.onthedrift.com/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Activator utilities: activate anything! - On The Drift</title>
+<meta name=description content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where ActivatorUtilities comes in.">
+<meta name=author content="Koen"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"On The Drift","url":"https:\/\/www.onthedrift.com"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/www.onthedrift.com"}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/www.onthedrift.com","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/www.onthedrift.com\/posts\/activator-utilities\/","name":"Activator utilities activate anything!"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Koen"},"headline":"Activator utilities: activate anything!","description":"Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That\u0026rsquo;s where ActivatorUtilities comes in.\n","inLanguage":"en","wordCount":1766,"datePublished":"2021-04-22T00:00:00","dateModified":"2021-04-22T00:00:00","image":"https:\/\/www.onthedrift.com\/img\/avatar-squared-nobody.png","keywords":[".NET, Dependency Injection"],"mainEntityOfPage":"https:\/\/www.onthedrift.com\/posts\/activator-utilities\/","publisher":{"@type":"Organization","name":"https:\/\/www.onthedrift.com","logo":{"@type":"ImageObject","url":"https:\/\/www.onthedrift.com\/img\/avatar-squared-nobody.png","height":60,"width":60}}}</script>
+<meta property="og:title" content="Activator utilities: activate anything!">
+<meta property="og:description" content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where ActivatorUtilities comes in.">
+<meta property="og:image" content="https://www.onthedrift.com/img/avatar-squared-nobody.png">
+<meta property="og:url" content="https://www.onthedrift.com/posts/activator-utilities/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="On The Drift">
+<meta name=twitter:title content="Activator utilities: activate anything!">
+<meta name=twitter:description content="Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET …">
+<meta name=twitter:image content="https://www.onthedrift.com/img/avatar-squared-nobody.png">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@onthedrift2">
+<meta name=twitter:creator content="@onthedrift2">
+<link href=https://www.onthedrift.com/img/avatar-squared-nobody.ico rel=icon type=image/x-icon>
+<meta name=generator content="Hugo 0.86.1">
+<link rel=alternate href=https://www.onthedrift.com/index.xml type=application/rss+xml title="On The Drift"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://www.onthedrift.com/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+<link rel=stylesheet href=https://www.onthedrift.com/css/highlight.min.css><link rel=stylesheet href=https://www.onthedrift.com/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+<div class=container-fluid>
+<div class=navbar-header>
+<button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
 <span class=sr-only>Toggle navigation</span>
-<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
-<a class=navbar-brand href=https://www.onthedrift.com>On The Drift</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=Blog href=/>Blog</a></li><li><a title=Tags href=/tags>Tags</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title="On The Drift" href=https://www.onthedrift.com><img class=avatar-img src=https://www.onthedrift.com/img/avatar-squared-nobody.png alt="On The Drift"></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+<a class=navbar-brand href=https://www.onthedrift.com>On The Drift</a>
+</div>
+<div class="collapse navbar-collapse" id=main-navbar>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a title=Blog href=/>Blog</a>
+</li>
+<li>
+<a title=Tags href=/tags>Tags</a>
+</li>
+</ul>
+</div>
+<div class=avatar-container>
+<div class=avatar-img-border>
+<a title="On The Drift" href=https://www.onthedrift.com>
+<img class=avatar-img src=https://www.onthedrift.com/img/avatar-squared-nobody.png alt="On The Drift">
+</a>
+</div>
+</div>
+</div>
+</nav>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-heading><h1>Activator utilities: activate anything!</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p>Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0">ActivatorUtilities</a> comes in.</p><h2 id=net-and-dependency-injection>.NET and Dependency injection</h2><p>In .NET, Dependencies are typically resolved through an interface <code>IServiceProvider</code>. This is backed by a DI container (ServiceProvider) that holds all registrations of possible instances, including their lifetimes. This means that the .NET DI Container is responsible for both managing registrations, lifetimes, and hooking them up together. For this post, I assume that you are familiar with DI and its implementation within .NET. To learn more about using DI in dotNET, check out the official <a href=//docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection>Microsoft documentation</a>. Examples given in this post are available on <a href=https://github.com/koenbeuk/ActivatorUtilityTests>Github</a></p><h2 id=resolving-dependencies>Resolving dependencies</h2><p>To resolve dependencies. You&rsquo;ll typically get your hands on an <code>IServiceProvider</code> instance. This same instance can then be used to dynamically resolve dependencies as shown below:</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>serviceProvider</span> <span class=p>=</span> <span class=k>new</span> <span class=n>ServiceCollection</span><span class=p>()</span>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div>
+<header class=header-section>
+<div class="intro-header no-img">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class=posts-heading>
+<h1>Activator utilities: activate anything!</h1>
+<hr class=small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<article role=main class=blog-post>
+<p>Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0">ActivatorUtilities</a> comes in.</p>
+<h2 id=net-and-dependency-injection>.NET and Dependency injection</h2>
+<p>In .NET, Dependencies are typically resolved through an interface <code>IServiceProvider</code>. This is backed by a DI container (ServiceProvider) that holds all registrations of possible instances, including their lifetimes. This means that the .NET DI Container is responsible for both managing registrations, lifetimes, and hooking them up together. For this post, I assume that you are familiar with DI and its implementation within .NET. To learn more about using DI in dotNET, check out the official <a href=//docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection>Microsoft documentation</a>. Examples given in this post are available on <a href=https://github.com/koenbeuk/ActivatorUtilityTests>Github</a></p>
+<h2 id=resolving-dependencies>Resolving dependencies</h2>
+<p>To resolve dependencies. You&rsquo;ll typically get your hands on an <code>IServiceProvider</code> instance. This same instance can then be used to dynamically resolve dependencies as shown below:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>serviceProvider</span> <span class=p>=</span> <span class=k>new</span> <span class=n>ServiceCollection</span><span class=p>()</span>
       <span class=p>.</span><span class=n>AddTransient</span><span class=p>&lt;</span><span class=n>Services</span><span class=p>.</span><span class=n>TransientService</span><span class=p>&gt;()</span>
       <span class=p>.</span><span class=n>BuildServiceProvider</span><span class=p>();</span>
 
 <span class=kt>var</span> <span class=n>service</span> <span class=p>=</span> <span class=n>serviceProvider</span><span class=p>.</span><span class=n>GetService</span><span class=p>&lt;</span><span class=n>TransientService</span><span class=p>&gt;();</span>
-</code></pre></div><p>This basic use-case of .NET&rsquo;s IServiceProvider works great when the dependency was registered beforehand with the ServiceProvider. But what if we want to get an instance of something that is not registered with the ServiceProvider:</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
+</code></pre></div><p>This basic use-case of .NET&rsquo;s IServiceProvider works great when the dependency was registered beforehand with the ServiceProvider. But what if we want to get an instance of something that is not registered with the ServiceProvider:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
     <span class=k>public</span> <span class=n>MyController</span><span class=p>(</span><span class=n>Services</span><span class=p>.</span><span class=n>TransientService</span> <span class=n>service</span><span class=p>)</span> <span class=p>{</span> <span class=p>...</span> <span class=p>}</span>
 <span class=p>}</span>
 
@@ -28,9 +142,18 @@
 </span><span class=c1></span>
 <span class=c1>// Attempt 3: Create an instance and resolve arguments through DI
 </span><span class=c1></span><span class=k>new</span> <span class=n>MyController</span><span class=p>(</span><span class=n>serviceProvider</span><span class=p>.</span><span class=n>GetService</span><span class=p>&lt;</span><span class=n>TransientService</span><span class=p>&gt;());</span> <span class=c1>// SUCCESS!
-</span></code></pre></div><p>In this case, Attempt 1 fails. The reason for this is that MyController was never registered with the DI container and therefore, the DI container would not be able to know anything about the lifetime of MyController. In this example, MyController is not even a dependency but rather a consumer.</p><p>Attempt 2 succeeds as it just works around DI altogether! Not great as we&rsquo;re now back to square 1 and responsible for constructing and managing the lifetime of the Service we just created.</p><p>So what about attempt 3? Well, it&rsquo;s a legitimate use case as it resolves dependencies from the DI container while we still manage construction and the lifetime of our consumer class. However, it can get a bit tedious. What if we required more than 1 dependency? We would have to make a call to ServiceProvider.GetService for each dependency. Perhaps worse: What if we did not know about the type of MyController at compile time? This is exactly the problem that ASP.NET MVC is facing where it has to construct Controllers of which it did know nothing of at compile-time and yet has to fulfill all dependencies.</p><p>So now we&rsquo;re dealing with 2 subsequent issues:
+</span></code></pre></div><p>In this case, Attempt 1 fails. The reason for this is that MyController was never registered with the DI container and therefore, the DI container would not be able to know anything about the lifetime of MyController. In this example, MyController is not even a dependency but rather a consumer.</p>
+<p>Attempt 2 succeeds as it just works around DI altogether! Not great as we&rsquo;re now back to square 1 and responsible for constructing and managing the lifetime of the Service we just created.</p>
+<p>So what about attempt 3? Well, it&rsquo;s a legitimate use case as it resolves dependencies from the DI container while we still manage construction and the lifetime of our consumer class. However, it can get a bit tedious. What if we required more than 1 dependency? We would have to make a call to ServiceProvider.GetService for each dependency. Perhaps worse: What if we did not know about the type of MyController at compile time? This is exactly the problem that ASP.NET MVC is facing where it has to construct Controllers of which it did know nothing of at compile-time and yet has to fulfill all dependencies.</p>
+<p>So now we&rsquo;re dealing with 2 subsequent issues:
 How can we create an instance of a type when we know at compile-time, the constructor but not the type?
-How can we create an instance of a type when we know neither the type nor the constructor at compile-time?</p><p>Luckily there is an easy answer and it&rsquo;s more powerful than you think!</p><h2 id=the-manual-approach>The manual approach</h2><p>When taking a dependency on the package: Microsoft.Extensions.DependencyInjection you&rsquo;ll get a type called <code>ActivatorUtilities</code> for free! But before we head into that, let&rsquo;s see if we can at least tackle some of these issues ourselves. First off:</p><h3 id=how-can-instantiate-mycontroller-at-runtime-when-we-know-the-constructor-but-not-the-type>How can instantiate MyController at runtime when we know the constructor but not the type?</h3><p>There is an easy way to this within just .NET, there are several.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controllerType</span> <span class=p>=</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>);</span>
+How can we create an instance of a type when we know neither the type nor the constructor at compile-time?</p>
+<p>Luckily there is an easy answer and it&rsquo;s more powerful than you think!</p>
+<h2 id=the-manual-approach>The manual approach</h2>
+<p>When taking a dependency on the package: Microsoft.Extensions.DependencyInjection you&rsquo;ll get a type called <code>ActivatorUtilities</code> for free! But before we head into that, let&rsquo;s see if we can at least tackle some of these issues ourselves. First off:</p>
+<h3 id=how-can-instantiate-mycontroller-at-runtime-when-we-know-the-constructor-but-not-the-type>How can instantiate MyController at runtime when we know the constructor but not the type?</h3>
+<p>There is an easy way to this within just .NET, there are several.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controllerType</span> <span class=p>=</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>);</span>
 
 <span class=c1>// Attempt 1
 </span><span class=c1></span><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>controllerType</span>
@@ -40,7 +163,11 @@ How can we create an instance of a type when we know neither the type nor the co
 <span class=c1>// Attempt 2
 </span><span class=c1></span><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>Activator</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>(</span><span class=n>controllerType</span><span class=p>,</span> <span class=n>ServiceProvider</span><span class=p>.</span><span class=n>GetService</span><span class=p>&lt;</span><span class=n>TransientService</span><span class=p>&gt;());</span> <span class=c1>// WORKS
 </span><span class=c1></span>
-</code></pre></div><p>Attempt 2 shows the use of the <code>Activator</code> class which has been around since the early days of .NET. It&rsquo;s a powerful tool in your arsenal that can be used to creates an instance of the specified type using the constructor that best matches the specified parameters.</p><p>Great, so now we know how to create an instance of a type without having to know the type at compile-time. So what about our next issue?</p><h3 id=how-can-we-create-an-instance-of-a-type-when-we-know-neither-the-type-nor-the-constructor-at-compile-time>How can we create an instance of a type when we know neither the type nor the constructor at compile-time?</h3><p>Now it gets a bit trickier. Both attempts shown above to create a new instance of a type at runtime require us to pass in an array of arguments that match in number, order, and type the parameters of the constructor to invoke.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controllerType</span> <span class=p>=</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>);</span> <span class=c1>// Imagine we don&#39;t know this at compile time
+</code></pre></div><p>Attempt 2 shows the use of the <code>Activator</code> class which has been around since the early days of .NET. It&rsquo;s a powerful tool in your arsenal that can be used to creates an instance of the specified type using the constructor that best matches the specified parameters.</p>
+<p>Great, so now we know how to create an instance of a type without having to know the type at compile-time. So what about our next issue?</p>
+<h3 id=how-can-we-create-an-instance-of-a-type-when-we-know-neither-the-type-nor-the-constructor-at-compile-time>How can we create an instance of a type when we know neither the type nor the constructor at compile-time?</h3>
+<p>Now it gets a bit trickier. Both attempts shown above to create a new instance of a type at runtime require us to pass in an array of arguments that match in number, order, and type the parameters of the constructor to invoke.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controllerType</span> <span class=p>=</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>);</span> <span class=c1>// Imagine we don&#39;t know this at compile time
 </span><span class=c1></span>
 <span class=kt>var</span> <span class=n>constructor</span> <span class=p>=</span> <span class=n>controllerType</span><span class=p>.</span><span class=n>GetConstructors</span><span class=p>().</span><span class=n>Single</span><span class=p>();</span>
 <span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>constructor</span><span class=p>.</span><span class=n>Invoke</span><span class=p>(</span>
@@ -48,8 +175,14 @@ How can we create an instance of a type when we know neither the type nor the co
             <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>parameter</span> <span class=p>=&gt;</span> <span class=n>ServiceProvider</span><span class=p>.</span><span class=n>GetService</span><span class=p>(</span><span class=n>parameter</span><span class=p>.</span><span class=n>ParameterType</span><span class=p>))</span>
             <span class=p>.</span><span class=n>ToArray</span><span class=p>()</span>
         <span class=p>);</span>
-</code></pre></div><p>There is no obvious advantage of using the <code>Activator</code> class here since we had to rely on Reflection to get a constructor to invoke. We also introduced the assumption that our type always has just one controller. Not great but it kinda&mldr; works.</p><h2 id=introducing-activatorutilities>Introducing ActivatorUtilities</h2><p>Since instantiating a type at runtime with constructor arguments resolved from an <code>IServiceProvider</code> is not an easy process. Microsoft included a powerful but not well-known class called <code>ActivatorUtilities</code>. This can be found in the <code>Microsoft.Extensions.DependencyInjection.Abstractions</code> NuGet package which you&rsquo;ll likely already have an (in)direct dependency on. Our last example can be rewritten with ease as:</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>);</span>
-</code></pre></div><p><code>ActivatorUtilities</code> will now create an instance of MyController by calling its constructor with any dependencies resolved through the <code>IServiceProvider</code>. This is excellent, so we&rsquo;re done right? Well, no. First, remember that assumption where we assumed that there was only 1 constructor. Let&rsquo;s take that assumption away and see what happens.</p><h3 id=activation-patterns>Activation patterns</h3><p>Let&rsquo;s first assume that <code>MyController</code> has 2 constructors. One taking no arguments and the other taking a <code>TransientService</code> argument (which is registered with our DI container). How will ActivatorUtilities behave in this case?</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
+</code></pre></div><p>There is no obvious advantage of using the <code>Activator</code> class here since we had to rely on Reflection to get a constructor to invoke. We also introduced the assumption that our type always has just one controller. Not great but it kinda&mldr; works.</p>
+<h2 id=introducing-activatorutilities>Introducing ActivatorUtilities</h2>
+<p>Since instantiating a type at runtime with constructor arguments resolved from an <code>IServiceProvider</code> is not an easy process. Microsoft included a powerful but not well-known class called <code>ActivatorUtilities</code>. This can be found in the <code>Microsoft.Extensions.DependencyInjection.Abstractions</code> NuGet package which you&rsquo;ll likely already have an (in)direct dependency on. Our last example can be rewritten with ease as:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>);</span>
+</code></pre></div><p><code>ActivatorUtilities</code> will now create an instance of MyController by calling its constructor with any dependencies resolved through the <code>IServiceProvider</code>. This is excellent, so we&rsquo;re done right? Well, no. First, remember that assumption where we assumed that there was only 1 constructor. Let&rsquo;s take that assumption away and see what happens.</p>
+<h3 id=activation-patterns>Activation patterns</h3>
+<p>Let&rsquo;s first assume that <code>MyController</code> has 2 constructors. One taking no arguments and the other taking a <code>TransientService</code> argument (which is registered with our DI container). How will ActivatorUtilities behave in this case?</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
     <span class=k>public</span> <span class=n>MyController</span><span class=p>()</span> <span class=p>{</span> 
         <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;Feeling empty!&#34;</span><span class=p>);</span>
     <span class=p>}</span> 
@@ -59,7 +192,9 @@ How can we create an instance of a type when we know neither the type nor the co
 <span class=p>}</span>
 
 <span class=kt>var</span> <span class=n>subject</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>);</span>
-</code></pre></div><p>When we run this code we&rsquo;ll find that &lsquo;Feeling empty!&rsquo; gets written to the console. Does this mean that ActivatorUtilities looks for the most fitting constructor (and in this case, the one with the least amount of work)? Well, the answer is no, <code>ActivatorUtilities</code> simply picks the first constructor that can do the job. So if the constructor that takes in the service was declared above the parameterless constructor then MyController would have been instantiated using that constructor. Only public constructors are considered.</p><p>We can however tell ActivatorUtilities which constructor to use, for this we have the <code>ActivatorUtilitiesConstructorAttribute</code> available. When applied to a constructor, this constructor will always be used by ActivatorUtilities.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
+</code></pre></div><p>When we run this code we&rsquo;ll find that &lsquo;Feeling empty!&rsquo; gets written to the console. Does this mean that ActivatorUtilities looks for the most fitting constructor (and in this case, the one with the least amount of work)? Well, the answer is no, <code>ActivatorUtilities</code> simply picks the first constructor that can do the job. So if the constructor that takes in the service was declared above the parameterless constructor then MyController would have been instantiated using that constructor. Only public constructors are considered.</p>
+<p>We can however tell ActivatorUtilities which constructor to use, for this we have the <code>ActivatorUtilitiesConstructorAttribute</code> available. When applied to a constructor, this constructor will always be used by ActivatorUtilities.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
     <span class=k>public</span> <span class=n>MyController</span><span class=p>()</span> <span class=p>{</span> 
         <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;Feeling empty!&#34;</span><span class=p>);</span>
     <span class=p>}</span> 
@@ -70,7 +205,11 @@ How can we create an instance of a type when we know neither the type nor the co
 <span class=p>}</span>
 
 <span class=kt>var</span> <span class=n>subject</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>);</span>
-</code></pre></div><p>As expected, this will write: &lsquo;I&rsquo;ve been served!&rsquo; to the console. You can only apply ActivatorUtilitiesConstructor to one constructor otherwise, you&rsquo;ll get an InvalidOperationException during runtime.</p><p>There is a third way of selecting what constructor should be used, this can be done through explicit arguments.</p><h3 id=explicit-arguments>Explicit arguments</h3><p>ActivatorUtilities allows you to specify constructor arguments manually, lets take our previous controller and create an instance with an explicit transient service and see what happens:</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
+</code></pre></div><p>As expected, this will write: &lsquo;I&rsquo;ve been served!&rsquo; to the console. You can only apply ActivatorUtilitiesConstructor to one constructor otherwise, you&rsquo;ll get an InvalidOperationException during runtime.</p>
+<p>There is a third way of selecting what constructor should be used, this can be done through explicit arguments.</p>
+<h3 id=explicit-arguments>Explicit arguments</h3>
+<p>ActivatorUtilities allows you to specify constructor arguments manually, lets take our previous controller and create an instance with an explicit transient service and see what happens:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
     <span class=k>public</span> <span class=n>MyController</span><span class=p>()</span> <span class=p>{</span> 
         <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;Feeling empty!&#34;</span><span class=p>);</span>
     <span class=p>}</span> 
@@ -81,29 +220,167 @@ How can we create an instance of a type when we know neither the type nor the co
 
 <span class=kt>var</span> <span class=n>subject</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>new</span> <span class=n>TransientService</span><span class=p>());</span>
 </code></pre></div><p>In this case again, &lsquo;I&rsquo;ve been served!&rsquo; is written to the console. Remember that ActivatorUtilities picks the first constructor that can do the job. In this case, our first empty does not accept any arguments while one explicit argument is given so it&rsquo;s not considered as a valid candidate.
-If we were to provide additional explicit arguments then we would get an <code>InvalidOperationException</code> informing us that no suitable constructor for activation could be located.</p><p>This is not only useful for selecting what constructor should be used. It also allows us to pass in explicit arguments that could or should otherwise not be resolved through dependency injection. Let&rsquo;s take a look at an example.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
+If we were to provide additional explicit arguments then we would get an <code>InvalidOperationException</code> informing us that no suitable constructor for activation could be located.</p>
+<p>This is not only useful for selecting what constructor should be used. It also allows us to pass in explicit arguments that could or should otherwise not be resolved through dependency injection. Let&rsquo;s take a look at an example.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=k>class</span> <span class=nc>MyController</span> <span class=p>{</span> 
     <span class=k>public</span> <span class=n>MyController</span><span class=p>(</span><span class=n>ITransientService</span> <span class=n>service1</span><span class=p>,</span> <span class=n>CancellationToken</span> <span class=n>cancellationToken</span><span class=p>,</span> <span class=n>ISingletonService</span> <span class=n>service2</span><span class=p>)</span> <span class=p>{</span> <span class=p>...</span> <span class=p>}</span>
 <span class=p>}</span>
 
 <span class=kt>var</span> <span class=n>cancellationTokenSource</span> <span class=p>=</span> <span class=k>new</span> <span class=n>CancellationTokenSource</span><span class=p>();</span>
 <span class=kt>var</span> <span class=n>subject</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>&lt;</span><span class=n>MyController</span><span class=p>&gt;(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=n>cancellationTokenSource</span><span class=p>.</span><span class=n>Token</span><span class=p>);</span>
-</code></pre></div><p>Not only were we able to provide an argument that would otherwise not be resolved through our DI container, but we were also still able to accept that argument in our constructor in whatever order we like. ActivatorUtilities only cares for the order of explicit arguments when multiple arguments are provided that are of the same type.</p><h3 id=activation-methods>Activation methods</h3><p>So far you&rsquo;ve seen an overload that requires an explicit type argument. However, just like our old Activator class, we also have an overload available that accepts a Type argument as shown below:</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>));</span>
-</code></pre></div><p>This is ideal for when you don&rsquo;t know the actual type that you&rsquo;re constructing at compile time.</p><p>There is also an overload that returns a delegate that can be invoked to create an instance, optionally accepting explicit arguments. Let see an example.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>factory</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateFactory</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>),</span> <span class=k>new</span> <span class=n>Type</span><span class=p>[]</span> <span class=p>{</span> <span class=p>});</span>
+</code></pre></div><p>Not only were we able to provide an argument that would otherwise not be resolved through our DI container, but we were also still able to accept that argument in our constructor in whatever order we like. ActivatorUtilities only cares for the order of explicit arguments when multiple arguments are provided that are of the same type.</p>
+<h3 id=activation-methods>Activation methods</h3>
+<p>So far you&rsquo;ve seen an overload that requires an explicit type argument. However, just like our old Activator class, we also have an overload available that accepts a Type argument as shown below:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateInstance</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>));</span>
+</code></pre></div><p>This is ideal for when you don&rsquo;t know the actual type that you&rsquo;re constructing at compile time.</p>
+<p>There is also an overload that returns a delegate that can be invoked to create an instance, optionally accepting explicit arguments. Let see an example.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>factory</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateFactory</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>),</span> <span class=k>new</span> <span class=n>Type</span><span class=p>[]</span> <span class=p>{</span> <span class=p>});</span>
 <span class=kt>var</span> <span class=n>instance</span> <span class=p>=</span> <span class=n>factory</span><span class=p>.</span><span class=n>Invoke</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>null</span><span class=p>)</span> <span class=k>as</span> <span class=n>Subject</span><span class=p>;</span>
-</code></pre></div><p>Or when using explicit arguments</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>factory</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateFactory</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>),</span> <span class=k>new</span> <span class=n>Type</span><span class=p>[]</span> <span class=p>{</span> <span class=k>typeof</span><span class=p>(</span><span class=n>TransientService</span><span class=p>)</span> <span class=p>});</span>
+</code></pre></div><p>Or when using explicit arguments</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>factory</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>CreateFactory</span><span class=p>(</span><span class=k>typeof</span><span class=p>(</span><span class=n>Subject</span><span class=p>),</span> <span class=k>new</span> <span class=n>Type</span><span class=p>[]</span> <span class=p>{</span> <span class=k>typeof</span><span class=p>(</span><span class=n>TransientService</span><span class=p>)</span> <span class=p>});</span>
 
 <span class=kt>var</span> <span class=n>service</span> <span class=p>=</span> <span class=k>new</span> <span class=n>TransientService</span><span class=p>();</span>
 <span class=kt>var</span> <span class=n>instance</span> <span class=p>=</span> <span class=n>factory</span><span class=p>.</span><span class=n>Invoke</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>new</span> <span class=kt>object</span><span class=p>[]</span> <span class=p>{</span> <span class=n>service</span> <span class=p>})</span> <span class=k>as</span> <span class=n>Subject</span><span class=p>;</span>
-</code></pre></div><p>This is particularly useful when performance is an issue as a suitable constructor is only located and analyzed once.</p><p>A third and less prominent feature is <code>GetServiceOrCreateInstance</code>. This little-known feature enables default or fallback implementations in case our DI container was not directly able to resolve an instance. Consider that we were in the need of an instance of a controller. It would be great if we could 1. Check with our DI container if it can resolve an instance of our controller and if not, create an instance ourselves.</p><div class=highlight><pre class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>GetServiceOrCreateInstance</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>));</span>
-</code></pre></div><p>As a consumer of this code, I would only need to care that my controller can be resolved from the DI container, and optionally I could register it so that I can also control its lifetime.</p><h2 id=conclusion>Conclusion</h2><p>ActivatorUtilities is a powerful tool in your belt when dealing with DI in general. You may not need it often but when you do, it&rsquo;s there and it just works. So how what does the future have in place for ActivatorUtilities? Well, probably not that much. It&rsquo;s rich in features already. Meanwhile, code generation is in many cases an excellent and in some cases even preferred candidate.</p><div class=blog-tags><a href=https://www.onthedrift.com/tags/.net/>.NET</a>&nbsp;
-<a href=https://www.onthedrift.com/tags/dependency-injection/>Dependency Injection</a>&nbsp;</div><hr><section id=social-share><div class="list-inline footer-links"><div class=share-box aria-hidden=true><ul class=share><li><a href="//twitter.com/share?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&text=Activator%20utilities%3a%20activate%20anything%21&via=onthedrift2" target=_blank title="Share on Twitter"><i class="fab fa-twitter"></i></a></li><li><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f" target=_blank title="Share on Facebook"><i class="fab fa-facebook"></i></a></li><li><a href="//reddit.com/submit?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on Reddit"><i class="fab fa-reddit"></i></a></li><li><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a></li><li><a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on StumbleUpon"><i class="fab fa-stumbleupon"></i></a></li><li><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&description=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on Pinterest"><i class="fab fa-pinterest"></i></a></li></ul></div></div></section><h4 class=see-also>See also</h4><ul><li><a href=/posts/efcore-projectables-perf/>EFCore.Projectables and the curious case of an unexpected performance boost</a></li><li><a href=/posts/efcore-projectables/>EF Projections on computed properties and methods without a hassle!</a></li><li><a href=/posts/scenario-tests/>Introducing ScenarioTests, an experiment in improving the .NET testing experience</a></li><li><a href=/posts/efcore-triggered-part1/>Triggers for Entity Framework Core</a></li></ul></article><ul class="pager blog-pager"><li class=next><a href=https://www.onthedrift.com/posts/efcore-triggered-part1/ data-toggle=tooltip data-placement=top title="Triggers for Entity Framework Core">Next Post &rarr;</a></li></ul><div class=disqus-comments><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//onthedrift.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=mailto:koen@linker.io title="Email me"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://github.com/koenbeuk title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://twitter.com/onthedrift2 title=Twitter><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/272424/polity title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a href title=RSS><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted"><a href=https://www.onthedrift.com>Koen</a>
+</code></pre></div><p>This is particularly useful when performance is an issue as a suitable constructor is only located and analyzed once.</p>
+<p>A third and less prominent feature is <code>GetServiceOrCreateInstance</code>. This little-known feature enables default or fallback implementations in case our DI container was not directly able to resolve an instance. Consider that we were in the need of an instance of a controller. It would be great if we could 1. Check with our DI container if it can resolve an instance of our controller and if not, create an instance ourselves.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=kt>var</span> <span class=n>controller</span> <span class=p>=</span> <span class=n>ActivatorUtilities</span><span class=p>.</span><span class=n>GetServiceOrCreateInstance</span><span class=p>(</span><span class=n>ServiceProvider</span><span class=p>,</span> <span class=k>typeof</span><span class=p>(</span><span class=n>MyController</span><span class=p>));</span>
+</code></pre></div><p>As a consumer of this code, I would only need to care that my controller can be resolved from the DI container, and optionally I could register it so that I can also control its lifetime.</p>
+<h2 id=conclusion>Conclusion</h2>
+<p>ActivatorUtilities is a powerful tool in your belt when dealing with DI in general. You may not need it often but when you do, it&rsquo;s there and it just works. So how what does the future have in place for ActivatorUtilities? Well, probably not that much. It&rsquo;s rich in features already. Meanwhile, code generation is in many cases an excellent and in some cases even preferred candidate.</p>
+<div class=blog-tags>
+<a href=https://www.onthedrift.com/tags/.net/>.NET</a>&nbsp;
+<a href=https://www.onthedrift.com/tags/dependency-injection/>Dependency Injection</a>&nbsp;
+</div>
+<hr>
+<section id=social-share>
+<div class="list-inline footer-links">
+<div class=share-box aria-hidden=true>
+<ul class=share>
+<li>
+<a href="//twitter.com/share?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&text=Activator%20utilities%3a%20activate%20anything%21&via=onthedrift2" target=_blank title="Share on Twitter">
+<i class="fab fa-twitter"></i>
+</a>
+</li>
+<li>
+<a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f" target=_blank title="Share on Facebook">
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="//reddit.com/submit?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on Reddit">
+<i class="fab fa-reddit"></i>
+</a>
+</li>
+<li>
+<a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on LinkedIn">
+<i class="fab fa-linkedin"></i>
+</a>
+</li>
+<li>
+<a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&title=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on StumbleUpon">
+<i class="fab fa-stumbleupon"></i>
+</a>
+</li>
+<li>
+<a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.onthedrift.com%2fposts%2factivator-utilities%2f&description=Activator%20utilities%3a%20activate%20anything%21" target=_blank title="Share on Pinterest">
+<i class="fab fa-pinterest"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<h4 class=see-also>See also</h4>
+<ul>
+<li><a href=/posts/efcore-projectables-perf/>EFCore.Projectables and the curious case of an unexpected performance boost</a></li>
+<li><a href=/posts/efcore-projectables/>EF Projections on computed properties and methods without a hassle!</a></li>
+<li><a href=/posts/scenario-tests/>Introducing ScenarioTests, an experiment in improving the .NET testing experience</a></li>
+<li><a href=/posts/efcore-triggered-part1/>Triggers for Entity Framework Core</a></li>
+</ul>
+</article>
+<ul class="pager blog-pager">
+<li class=next>
+<a href=https://www.onthedrift.com/posts/efcore-triggered-part1/ data-toggle=tooltip data-placement=top title="Triggers for Entity Framework Core">Next Post &rarr;</a>
+</li>
+</ul>
+<div class=disqus-comments>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//onthedrift.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<ul class="list-inline text-center footer-links">
+<li>
+<a href=mailto:koen@linker.io title="Email me">
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://github.com/koenbeuk title=GitHub>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://twitter.com/onthedrift2 title=Twitter>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://stackoverflow.com/users/272424/polity title=StackOverflow>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href title=RSS>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+</ul>
+<p class="credits copyright text-muted">
+<a href=https://www.onthedrift.com>Koen</a>
 &nbsp;&bull;&nbsp;&copy;
 2021
 &nbsp;&bull;&nbsp;
-<a href=https://www.onthedrift.com>On The Drift</a></p><p class="credits theme-by text-muted"><a href=https://gohugo.io>Hugo v0.85.0</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
-&nbsp;&bull;&nbsp;[<a href=https://github.com/koenbeuk/onthedrift/tree/cca0c661b04decae218d9e36c8af36b9b859b577>cca0c661</a>]</p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script><script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script src=https://www.onthedrift.com/js/main.js></script><script src=https://www.onthedrift.com/js/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script><script>$(document).ready(function(){$("pre.chroma").css("padding","0")})</script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://www.onthedrift.com/js/load-photoswipe.js></script></body></html>
+<a href=https://www.onthedrift.com>On The Drift</a>
+</p>
+<p class="credits theme-by text-muted">
+<a href=https://gohugo.io>Hugo v0.86.1</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
+&nbsp;&bull;&nbsp;[<a href=https://github.com/koenbeuk/onthedrift/tree/cca0c661b04decae218d9e36c8af36b9b859b577>cca0c661</a>]
+</p>
+</div>
+</div>
+</div>
+</footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script>
+<script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script src=https://www.onthedrift.com/js/main.js></script>
+<script src=https://www.onthedrift.com/js/highlight.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<script>$(document).ready(function(){$("pre.chroma").css("padding","0")})</script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://www.onthedrift.com/js/load-photoswipe.js></script>
+<script type=text/javascript>!function(b,d,a){var e=b.location,o="script",n="instrumentationKey",g="ingestionendpoint",k="disableExceptionTracking",i="ai.device.",j="toLowerCase",h="crossOrigin",l="POST",m="appInsightsSDK",f=a.name||"appInsights",c;(a.name||b[m])&&(b[m]=f),c=b[f]||function(f){var z=!1,q=!1,c={initialize:!0,queue:[],sv:"5",version:2,config:f},r,s,m,x,y,B,p,A;function w(b,f){var a={},d="Browser";return a[i+"id"]=d[j](),a[i+"type"]=d,a["ai.operation.name"]=e&&e.pathname||"_unknown_",a["ai.internal.sdkVersion"]="javascript:snippet_"+(c.sv||c.version),{time:function(){var a=new Date;function b(b){var a=""+b;return 1===a.length&&(a="0"+a),a}return a.getUTCFullYear()+"-"+b(1+a.getUTCMonth())+"-"+b(a.getUTCDate())+"T"+b(a.getUTCHours())+":"+b(a.getUTCMinutes())+":"+b(a.getUTCSeconds())+"."+((a.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:b,name:"Microsoft.ApplicationInsights."+b.replace(/-/g,"")+"."+f,sampleRate:100,tags:a,data:{baseData:{ver:2}}}}if(r=f.url||a.src,r){function u(x){var h,i,t,u,v,s,o,p,k,d,m;z=!0,c.queue=[],q||(q=!0,h=r,o=function(){var a={},d=f.connectionString,e,b,c,h,i;if(d)for(e=d.split(";"),b=0;b<e.length;b++)c=e[b].split("="),2===c.length&&(a[c[0][j]()]=c[1]);return a[g]||(h=a.endpointsuffix,i=h?a.location:null,a[g]="https://"+(i?i+".":"")+"dc."+(h||"services.visualstudio.com")),a}(),p=o[n]||f[n]||"",k=o[g],d=k?k+"/v2/track":f.endpointUrl,(m=[]).push((i="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",t=h,u=d,(s=(v=w(p,"Exception")).data).baseType="ExceptionData",s.baseData.exceptions=[{typeName:"SDKLoadFailed",message:i.replace(/\./g,"-"),hasFullStack:!1,stack:i+"\nSnippet failed to load ["+t+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(e&&e.pathname||"_unknown_")+"\nEndpoint: "+u,parsedStack:[]}],v)),m.push(function(g,f,d,e){var b=w(p,"Message"),c=b.data,a;return c.baseType="MessageData",a=c.baseData,a.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+d+")").replace(/\"/g,"")+'"',a.properties={endpoint:e},b}(0,0,h,d)),function(e,f){var d,c;JSON&&(d=b.fetch,d&&!a.useXhr?d(f,{method:l,body:JSON.stringify(e),mode:"cors"}):XMLHttpRequest&&(c=new XMLHttpRequest,c.open(l,f),c.setRequestHeader("Content-type","application/json"),c.send(JSON.stringify(e))))}(m,d))}function t(b,a){q||setTimeout(function(){!a&&c.core||u()},500)}s=function(){var b=d.createElement(o),c;return b.src=r,c=a[h],!c&&""!==c||"undefined"==b[h]||(b[h]=c),b.onload=t,b.onerror=u,b.onreadystatechange=function(c,a){"loaded"!==b.readyState&&"complete"!==b.readyState||t(0,a)},b}(),a.ld<0?d.getElementsByTagName("head")[0].appendChild(s):setTimeout(function(){d.getElementsByTagName(o)[0].parentNode.appendChild(s)},a.ld||0)}try{c.cookie=d.cookie}catch(a){}function v(a){for(;a.length;)!function(a){c[a]=function(){var b=arguments;z||c.queue.push(function(){c[a].apply(c,b)})}}(a.pop())}return m="track",x="TrackPage",y="TrackEvent",v([m+"Event",m+"PageView",m+"Exception",m+"Trace",m+"DependencyData",m+"Metric",m+"PageViewPerformance","start"+x,"stop"+x,"start"+y,"stop"+y,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),c.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},B=(f.extensionConfig||{}).ApplicationInsightsAnalytics||{},!0!==f[k]&&!0!==B[k]&&(p="onerror",v(["_"+p]),A=b[p],b[p]=function(a,b,d,e,f){var g=A&&A(a,b,d,e,f);return!0!==g&&c["_"+p]({message:a,url:b,lineNumber:d,columnNumber:e,error:f}),g},f.autoExceptionInstrumented=!0),c}(a.cfg);function p(){a.onInit&&a.onInit(c)}(b[f]=c).queue&&0===c.queue.length?(c.queue.push(p),c.trackPageView({})):p()}(window,document,{src:"https://js.monitor.azure.com/scripts/b/ai.2.min.js",crossOrigin:"anonymous",cfg:{connectionString:"InstrumentationKey=cfd015d4-8126-4254-bc26-a6a73ad5d6d0;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/"}})</script>
+</body>
+</html>
