@@ -3,7 +3,6 @@ languageCode = "en-us"
 title = "On The Drift"
 theme = "beautifulhugo"
 enableRobotsTXT = true
-disqusShortname = "onthedrift"
 enableEmoji = true
 enableGitInfo = true
 pygmentsCodeFences = true
