@@ -85,7 +85,7 @@ Again, not such a great experience and certainly not good for performance. We co
 
 If you recall from our LINQ Query, we also had to make a call to `AsExpandable()` to ensure that the LINQ Query would be rewritten to translate our `FullName()` call into the implementation that EF would actually understand. This again adds more complexity as well to the query and thereby also incurring a performance impact on the execution of that query.
 
-These libraries have helpers us over time but it's 2021 and we have new tools in our tool belt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
+These libraries have helped us over time but it's 2021 and we have new tools in our tool belt! introducing: [EntityFrameworkCore.Projectables](https://github.com/koenbeuk/EntityFrameworkCore.Projectables)!
 
 ### EFCore Projectables
 
