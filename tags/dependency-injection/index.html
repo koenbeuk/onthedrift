@@ -1,206 +1,34 @@
-<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Dependency Injection - On The Drift</title>
-<meta name=author content="Koen"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"On The Drift","url":"https:\/\/www.onthedrift.com"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/www.onthedrift.com"}</script>
-<meta property="og:title" content="Dependency Injection">
-<meta property="og:image" content="https://www.onthedrift.com/img/avatar-squared-nobody.png">
-<meta property="og:url" content="https://www.onthedrift.com/tags/dependency-injection/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="On The Drift">
-<meta name=twitter:title content="Dependency Injection">
-<meta name=twitter:image content="https://www.onthedrift.com/img/avatar-squared-nobody.png">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@onthedrift2">
-<meta name=twitter:creator content="@onthedrift2">
-<link href=https://www.onthedrift.com/img/avatar-squared-nobody.ico rel=icon type=image/x-icon>
-<meta name=generator content="Hugo 0.87.0">
-<link rel=alternate href=https://www.onthedrift.com/index.xml type=application/rss+xml title="On The Drift"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
-<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://www.onthedrift.com/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
-<link rel=stylesheet href=https://www.onthedrift.com/css/highlight.min.css><link rel=stylesheet href=https://www.onthedrift.com/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous>
-</head>
-<body>
-<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-<div class=container-fluid>
-<div class=navbar-header>
-<button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Dependency Injection - On The Drift</title><meta name=author content="Koen"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"On The Drift","url":"https:\/\/www.onthedrift.com"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/www.onthedrift.com"}</script><meta property="og:title" content="Dependency Injection"><meta property="og:image" content="https://www.onthedrift.com/img/avatar-squared-nobody.png"><meta property="og:url" content="https://www.onthedrift.com/tags/dependency-injection/"><meta property="og:type" content="website"><meta property="og:site_name" content="On The Drift"><meta name=twitter:title content="Dependency Injection"><meta name=twitter:image content="https://www.onthedrift.com/img/avatar-squared-nobody.png"><meta name=twitter:card content="summary"><meta name=twitter:site content="@onthedrift2"><meta name=twitter:creator content="@onthedrift2"><link href=https://www.onthedrift.com/img/avatar-squared-nobody.ico rel=icon type=image/x-icon><meta name=generator content="Hugo 0.109.0"><link rel=alternate href=https://www.onthedrift.com/index.xml type=application/rss+xml title="On The Drift"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://www.onthedrift.com/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://www.onthedrift.com/css/highlight.min.css><link rel=stylesheet href=https://www.onthedrift.com/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
-<span class=icon-bar></span>
-</button>
-<a class=navbar-brand href=https://www.onthedrift.com>On The Drift</a>
-</div>
-<div class="collapse navbar-collapse" id=main-navbar>
-<ul class="nav navbar-nav navbar-right">
-<li>
-<a title=Blog href=/>Blog</a>
-</li>
-<li>
-<a title=Tags href=/tags>Tags</a>
-</li>
-</ul>
-</div>
-<div class=avatar-container>
-<div class=avatar-img-border>
-<a title="On The Drift" href=https://www.onthedrift.com>
-<img class=avatar-img src=https://www.onthedrift.com/img/avatar-squared-nobody.png alt="On The Drift">
-</a>
-</div>
-</div>
-</div>
-</nav>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
-<div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
-<div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=https://www.onthedrift.com>On The Drift</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=Blog href=/>Blog</a></li><li><a title=Tags href=/tags>Tags</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title="On The Drift" href=https://www.onthedrift.com><img class=avatar-img src=https://www.onthedrift.com/img/avatar-squared-nobody.png alt="On The Drift"></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-<div class=pswp__preloader>
-<div class=pswp__preloader__icn>
-<div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-</button>
-<div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div>
-<header class=header-section>
-<div class="intro-header no-img">
-<div class=container>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=tags-heading>
-<h1>Dependency Injection</h1>
-<hr class=small>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header>
-<div class=container role=main>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=posts-list>
-<article class=post-preview>
-<a href=https://www.onthedrift.com/posts/activator-utilities/>
-<h2 class=post-title>Activator utilities: activate anything!</h2>
-</a>
-<p class=post-meta>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Posted on April 22, 2021
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=tags-heading><h1>Dependency Injection</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-list><article class=post-preview><a href=https://www.onthedrift.com/posts/activator-utilities/><h2 class=post-title>Activator utilities: activate anything!</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on April 22, 2021
 &nbsp;(Last modified on July 14, 2021)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;9&nbsp;minutes
-</span>
-</p>
-<div class=post-entry>
-<p>Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0">ActivatorUtilities</a> comes in.</p>
-<a href=https://www.onthedrift.com/posts/activator-utilities/ class=post-read-more>[Read More]</a>
-</div>
-<div class=blog-tags>
-<a href=https://www.onthedrift.com/tags/.net/>.NET</a>&nbsp;
-<a href=https://www.onthedrift.com/tags/dependency-injection/>Dependency Injection</a>&nbsp;
-</div>
-</article>
-</div>
-</div>
-</div>
-</div>
-<footer>
-<div class=container>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<ul class="list-inline text-center footer-links">
-<li>
-<a href=mailto:koen@linker.io title="Email me">
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://github.com/koenbeuk title=GitHub>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://twitter.com/onthedrift2 title=Twitter>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://stackoverflow.com/users/272424/polity title=StackOverflow>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=/tags/dependency-injection/index.xml title=RSS>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fas fa-rss fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-</ul>
-<p class="credits copyright text-muted">
-<a href=https://www.onthedrift.com>Koen</a>
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;9&nbsp;minutes</span></p><div class=post-entry><p>Dependency injection (DI) is a well-known technique that helps in writing more maintainable code. .NET has excellent support for Dependency injection and is heavily used in platforms such as ASP.NET Core. However, did you know there is a way to automatically instantiate a type with constructor arguments provided from an IServiceProvider without having to register that type with the DI Container first? That&rsquo;s where <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities?view=dotnet-plat-ext-5.0">ActivatorUtilities</a> comes in.</p><a href=https://www.onthedrift.com/posts/activator-utilities/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=https://www.onthedrift.com/tags/.net/>.NET</a>&nbsp;
+<a href=https://www.onthedrift.com/tags/dependency-injection/>Dependency Injection</a>&nbsp;</div></article></div></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=mailto:koen@linker.io title="Email me"><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://github.com/koenbeuk title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://twitter.com/onthedrift2 title=Twitter><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/272424/polity title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li><li><a href=/tags/dependency-injection/index.xml title=RSS><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fas fa-rss fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted"><a href=https://www.onthedrift.com>Koen</a>
 &nbsp;&bull;&nbsp;&copy;
-2021
+2023
 &nbsp;&bull;&nbsp;
-<a href=https://www.onthedrift.com>On The Drift</a>
-</p>
-<p class="credits theme-by text-muted">
-<a href=https://gohugo.io>Hugo v0.87.0</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
-</p>
-</div>
-</div>
-</div>
-</footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
+<a href=https://www.onthedrift.com>On The Drift</a></p><p class="credits theme-by text-muted"><a href=https://gohugo.io>Hugo v0.109.0</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a></p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script>
 <script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
 <script src=https://www.onthedrift.com/js/main.js></script>
 <script src=https://www.onthedrift.com/js/highlight.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<script>$(document).ready(function(){$("pre.chroma").css("padding","0")})</script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script>
+<script>hljs.initHighlightingOnLoad()</script><script>$(document).ready(function(){$("pre.chroma").css("padding","0")})</script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://www.onthedrift.com/js/load-photoswipe.js></script>
-<script type=text/javascript>!function(b,d,a){var e=b.location,o="script",n="instrumentationKey",g="ingestionendpoint",k="disableExceptionTracking",i="ai.device.",j="toLowerCase",h="crossOrigin",l="POST",m="appInsightsSDK",f=a.name||"appInsights",c;(a.name||b[m])&&(b[m]=f),c=b[f]||function(f){var z=!1,q=!1,c={initialize:!0,queue:[],sv:"5",version:2,config:f},r,s,m,x,y,B,p,A;function w(b,f){var a={},d="Browser";return a[i+"id"]=d[j](),a[i+"type"]=d,a["ai.operation.name"]=e&&e.pathname||"_unknown_",a["ai.internal.sdkVersion"]="javascript:snippet_"+(c.sv||c.version),{time:function(){var a=new Date;function b(b){var a=""+b;return 1===a.length&&(a="0"+a),a}return a.getUTCFullYear()+"-"+b(1+a.getUTCMonth())+"-"+b(a.getUTCDate())+"T"+b(a.getUTCHours())+":"+b(a.getUTCMinutes())+":"+b(a.getUTCSeconds())+"."+((a.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:b,name:"Microsoft.ApplicationInsights."+b.replace(/-/g,"")+"."+f,sampleRate:100,tags:a,data:{baseData:{ver:2}}}}if(r=f.url||a.src,r){function u(x){var h,i,t,u,v,s,o,p,k,d,m;z=!0,c.queue=[],q||(q=!0,h=r,o=function(){var a={},d=f.connectionString,e,b,c,h,i;if(d)for(e=d.split(";"),b=0;b<e.length;b++)c=e[b].split("="),2===c.length&&(a[c[0][j]()]=c[1]);return a[g]||(h=a.endpointsuffix,i=h?a.location:null,a[g]="https://"+(i?i+".":"")+"dc."+(h||"services.visualstudio.com")),a}(),p=o[n]||f[n]||"",k=o[g],d=k?k+"/v2/track":f.endpointUrl,(m=[]).push((i="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",t=h,u=d,(s=(v=w(p,"Exception")).data).baseType="ExceptionData",s.baseData.exceptions=[{typeName:"SDKLoadFailed",message:i.replace(/\./g,"-"),hasFullStack:!1,stack:i+"\nSnippet failed to load ["+t+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(e&&e.pathname||"_unknown_")+"\nEndpoint: "+u,parsedStack:[]}],v)),m.push(function(g,f,d,e){var b=w(p,"Message"),c=b.data,a;return c.baseType="MessageData",a=c.baseData,a.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+d+")").replace(/\"/g,"")+'"',a.properties={endpoint:e},b}(0,0,h,d)),function(e,f){var d,c;JSON&&(d=b.fetch,d&&!a.useXhr?d(f,{method:l,body:JSON.stringify(e),mode:"cors"}):XMLHttpRequest&&(c=new XMLHttpRequest,c.open(l,f),c.setRequestHeader("Content-type","application/json"),c.send(JSON.stringify(e))))}(m,d))}function t(b,a){q||setTimeout(function(){!a&&c.core||u()},500)}s=function(){var b=d.createElement(o),c;return b.src=r,c=a[h],!c&&""!==c||"undefined"==b[h]||(b[h]=c),b.onload=t,b.onerror=u,b.onreadystatechange=function(c,a){"loaded"!==b.readyState&&"complete"!==b.readyState||t(0,a)},b}(),a.ld<0?d.getElementsByTagName("head")[0].appendChild(s):setTimeout(function(){d.getElementsByTagName(o)[0].parentNode.appendChild(s)},a.ld||0)}try{c.cookie=d.cookie}catch(a){}function v(a){for(;a.length;)!function(a){c[a]=function(){var b=arguments;z||c.queue.push(function(){c[a].apply(c,b)})}}(a.pop())}return m="track",x="TrackPage",y="TrackEvent",v([m+"Event",m+"PageView",m+"Exception",m+"Trace",m+"DependencyData",m+"Metric",m+"PageViewPerformance","start"+x,"stop"+x,"start"+y,"stop"+y,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),c.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},B=(f.extensionConfig||{}).ApplicationInsightsAnalytics||{},!0!==f[k]&&!0!==B[k]&&(p="onerror",v(["_"+p]),A=b[p],b[p]=function(a,b,d,e,f){var g=A&&A(a,b,d,e,f);return!0!==g&&c["_"+p]({message:a,url:b,lineNumber:d,columnNumber:e,error:f}),g},f.autoExceptionInstrumented=!0),c}(a.cfg);function p(){a.onInit&&a.onInit(c)}(b[f]=c).queue&&0===c.queue.length?(c.queue.push(p),c.trackPageView({})):p()}(window,document,{src:"https://js.monitor.azure.com/scripts/b/ai.2.min.js",crossOrigin:"anonymous",cfg:{connectionString:"InstrumentationKey=cfd015d4-8126-4254-bc26-a6a73ad5d6d0;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/"}})</script>
-</body>
-</html>
+<script type=text/javascript>!function(e,t,n){var s,o=e.location,f="script",m="instrumentationKey",a="ingestionendpoint",d="disableExceptionTracking",l="ai.device.",c="toLowerCase",r="crossOrigin",u="POST",h="appInsightsSDK",i=n.name||"appInsights";(n.name||e[h])&&(e[h]=i),s=e[i]||function(s){var p,g,v,j,C,k=!1,b=!1,i={initialize:!0,queue:[],sv:"5",version:2,config:s};function y(e,t){var n={},s="Browser";return n[l+"id"]=s[c](),n[l+"type"]=s,n["ai.operation.name"]=o&&o.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(i.sv||i.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}if(g=s.url||n.src,g){function E(){var r,l,d,h,f,p,v,j,_,w,O;k=!0,i.queue=[],b||(b=!0,l=g,h=function(){var t,n,o,i,r,e={},l=s.connectionString;if(l)for(o=l.split(";"),t=0;t<o.length;t++)n=o[t].split("="),2===n.length&&(e[n[0][c]()]=n[1]);return e[a]||(i=e.endpointsuffix,r=i?e.location:null,e[a]="https://"+(r?r+".":"")+"dc."+(i||"services.visualstudio.com")),e}(),f=h[m]||s[m]||"",p=h[a],r=p?p+"/v2/track":s.endpointUrl,(v=[]).push((d="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",j=l,_=r,(O=(w=y(f,"Exception")).data).baseType="ExceptionData",O.baseData.exceptions=[{typeName:"SDKLoadFailed",message:d.replace(/\./g,"-"),hasFullStack:!1,stack:d+`
+Snippet failed to load [`+j+`] -- Telemetry is disabled
+Help Link: https://go.microsoft.com/fwlink/?linkid=2128109
+Host: `+(o&&o.pathname||"_unknown_")+`
+Endpoint: `+_,parsedStack:[]}],w)),v.push(function(e,t,n,s){var o,i=y(f,"Message"),a=i.data;return a.baseType="MessageData",o=a.baseData,o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/"/g,"")+'"',o.properties={endpoint:s},i}(0,0,l,r)),function(t,s){if(JSON){var o,i=e.fetch;i&&!n.useXhr?i(s,{method:u,body:JSON.stringify(t),mode:"cors"}):XMLHttpRequest&&(o=new XMLHttpRequest,o.open(u,s),o.setRequestHeader("Content-type","application/json"),o.send(JSON.stringify(t)))}}(v,r))}function w(e,t){b||setTimeout(function(){!t&&i.core||E()},500)}v=function(){var s,e=t.createElement(f);return e.src=g,s=n[r],!s&&""!==s||"undefined"==e[r]||(e[r]=s),e.onload=w,e.onerror=E,e.onreadystatechange=function(t,n){"loaded"!==e.readyState&&"complete"!==e.readyState||w(0,n)},e}(),n.ld<0?t.getElementsByTagName("head")[0].appendChild(v):setTimeout(function(){t.getElementsByTagName(f)[0].parentNode.appendChild(v)},n.ld||0)}try{i.cookie=t.cookie}catch{}function _(e){for(;e.length;)!function(e){i[e]=function(){var t=arguments;k||i.queue.push(function(){i[e].apply(i,t)})}}(e.pop())}var h="track",O="TrackPage",x="TrackEvent";return _([h+"Event",h+"PageView",h+"Exception",h+"Trace",h+"DependencyData",h+"Metric",h+"PageViewPerformance","start"+O,"stop"+O,"start"+x,"stop"+x,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),i.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},C=(s.extensionConfig||{}).ApplicationInsightsAnalytics||{},!0!==s[d]&&!0!==C[d]&&(p="onerror",_(["_"+p]),j=e[p],e[p]=function(e,t,n,s,o){var a=j&&j(e,t,n,s,o);return!0!==a&&i["_"+p]({message:e,url:t,lineNumber:n,columnNumber:s,error:o}),a},s.autoExceptionInstrumented=!0),i}(n.cfg);function p(){n.onInit&&n.onInit(s)}(e[i]=s).queue&&0===s.queue.length?(s.queue.push(p),s.trackPageView({})):p()}(window,document,{src:"https://js.monitor.azure.com/scripts/b/ai.2.min.js",crossOrigin:"anonymous",cfg:{connectionString:"InstrumentationKey=cfd015d4-8126-4254-bc26-a6a73ad5d6d0;IngestionEndpoint=https://westus2-0.in.applicationinsights.azure.com/"}})</script></body></html>
