@@ -1,0 +1,82 @@
+<style>
+  .avatar-img-border a { position: relative; display: block; }
+  .avatar-face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .avatar-face .mouth { transition: opacity 200ms ease-in-out; }
+  .avatar-face .mouth-pleased { opacity: 0; }
+  .avatar-face.pleased .mouth-neutral { opacity: 0; }
+  .avatar-face.pleased .mouth-pleased { opacity: 1; }
+</style>
+<script>
+(function () {
+  var img = document.querySelector('.avatar-img');
+  if (!img) return;
+
+  var SIZE = 404;
+  var eyes = [
+    { cx: 160, cy: 246, rx: 51, ry: 56, x: 195, y: 248.5 },
+    { cx: 262, cy: 248, rx: 49, ry: 56, x: 299, y: 249 }
+  ];
+  var TRAVEL = 0.72;
+  var FULL_REACH_PX = 200;
+
+  img.src = '{{ "img/avatar-squared-nobody-blank.png" | relURL }}';
+  img.insertAdjacentHTML('afterend',
+    '<svg class="avatar-face" viewBox="0 0 404 404" aria-hidden="true">' +
+      '<circle class="pupil" r="5.5" fill="#101010"/>' +
+      '<circle class="pupil" r="5.5" fill="#101010"/>' +
+      '<path class="mouth mouth-neutral" d="M184 356 Q205 346 237 361" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>' +
+      '<path class="mouth mouth-pleased" d="M186 354 Q211 362 235 355" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/>' +
+    '</svg>');
+
+  var face = img.nextElementSibling;
+  var pupils = face.querySelectorAll('.pupil');
+
+  function place(i, x, y) {
+    pupils[i].setAttribute('cx', x);
+    pupils[i].setAttribute('cy', y);
+  }
+
+  eyes.forEach(function (eye, i) { place(i, eye.x, eye.y); });
+
+  var pending = false, mouseX = 0, mouseY = 0;
+
+  function update() {
+    pending = false;
+    var rect = img.getBoundingClientRect();
+    if (!rect.width) return;
+    var scale = rect.width / SIZE;
+    eyes.forEach(function (eye, i) {
+      var dx = mouseX - (rect.left + eye.cx * scale);
+      var dy = mouseY - (rect.top + eye.cy * scale);
+      var dist = Math.hypot(dx, dy);
+      if (!dist) return place(i, eye.cx, eye.cy);
+      var reach = Math.min(1, dist / FULL_REACH_PX) * TRAVEL;
+      place(i, eye.cx + dx / dist * eye.rx * reach, eye.cy + dy / dist * eye.ry * reach);
+    });
+  }
+
+  document.addEventListener('mousemove', function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(update);
+    }
+  });
+
+  var PLEASING = 'a[href], button';
+
+  document.addEventListener('mouseover', function (e) {
+    face.classList.toggle('pleased', !!e.target.closest(PLEASING));
+  });
+  document.addEventListener('mouseleave', function () {
+    face.classList.remove('pleased');
+  });
+})();
+</script>
