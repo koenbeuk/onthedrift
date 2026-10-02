@@ -1,5 +1,5 @@
 baseURL = "https://www.onthedrift.com"
-languageCode = "en-us"
+locale = "en-us"
 title = "On The Drift"
 theme = "beautifulhugo"
 enableRobotsTXT = true
@@ -21,7 +21,7 @@ pygmentsUseClasses = true
   hideAuthor = true
   useHLJS = true
 
-[Author]
+[Params.author]
   name = "Koen"
   website = "https://www.onthedrift.com"
   email = "koen@linker.io"
